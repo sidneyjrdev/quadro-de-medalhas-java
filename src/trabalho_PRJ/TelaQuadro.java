@@ -48,7 +48,12 @@ public class TelaQuadro extends JFrame implements ActionListener {
 	private ImageIcon imgGerenciar = new ImageIcon(getClass().getResource("/imagens/gerenciar.png"));
 	private JButton btnGerenciarUsuario = new JButton(imgGerenciar);
 
-	private JTable tabela = new JTable();
+	private JTable tabela = new JTable(){
+		  @Override
+		  public boolean isCellEditable(int row, int column){
+		                return false;
+		  }
+		};
 
 	DefaultTableModel model;
 	

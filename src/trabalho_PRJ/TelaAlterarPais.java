@@ -18,15 +18,21 @@ public class TelaAlterarPais extends JFrame implements ActionListener{
 	Pais p = new Pais();
 	Quadro q = new Quadro();
 	
-	String nomeOriginal, siglaOriginal, sigla;
+	String nomeOriginal, siglaOriginal, sigla, ouroOriginal, prataOriginal, bronzeOriginal;
 	private JLabel lblSigla = new JLabel("SIGLA:");
 	private JLabel lblNome = new JLabel("NOME:");
+	private JLabel lblOuro = new JLabel("OURO:");
+	private JLabel lblPrata = new JLabel("PRATA:");
+	private JLabel lblBronze = new JLabel("BRONZE:");
 	
 	private JButton btnOk = new JButton("OK");
 	private JButton btnCancelar = new JButton("Cancelar");
 	
 	private JTextField txtSigla;
 	private JTextField txtNome;
+	private JTextField txtOuro;
+	private JTextField txtPrata;
+	private JTextField txtBronze;
 	
 	
 	 public TelaAlterarPais(String sigla){
@@ -35,19 +41,25 @@ public class TelaAlterarPais extends JFrame implements ActionListener{
 		setLayout(new BorderLayout());
 		setTitle("Alterar País");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setSize(400,200);
+		setSize(400,400);
 		setLocationRelativeTo(null);
 		
 		JPanel botoes = new JPanel();
-		JPanel resto = new JPanel(new GridLayout(2, 2, 3, 5));
+		JPanel resto = new JPanel(new GridLayout(5, 2, 3, 5));
 		
 		p = q.obterPais(sigla);
 		
 		nomeOriginal = p.getNome();
 		siglaOriginal = p.getSigla();
+		ouroOriginal = p.getOuro() + "";
+		prataOriginal = p.getPrata() + "";
+		bronzeOriginal = p.getBronze() + "";
 		
 		txtSigla  = new JTextField(siglaOriginal);
 		txtNome  = new JTextField(nomeOriginal);
+		txtOuro  = new JTextField(ouroOriginal);
+		txtPrata  = new JTextField(prataOriginal);
+		txtBronze  = new JTextField(bronzeOriginal);
 		
 		botoes.add(btnOk);
 		btnOk.addActionListener(this);
@@ -62,6 +74,15 @@ public class TelaAlterarPais extends JFrame implements ActionListener{
 	    
 	    resto.add(lblSigla);
 	    resto.add(txtSigla);
+	    
+	    resto.add(lblOuro);
+	    resto.add(txtOuro);
+	    
+	    resto.add(lblPrata);
+	    resto.add(txtPrata);
+	    
+	    resto.add(lblBronze);
+	    resto.add(txtBronze);
 	
 		add(resto);
 		
@@ -79,6 +100,9 @@ public class TelaAlterarPais extends JFrame implements ActionListener{
 			if((condicao == null || siglaNova.equals(siglaOriginal)) && !(siglaNova.isEmpty())){
 			p.setSigla(txtSigla.getText());
 			p.setNome(txtNome.getText());
+			p.setOuro(Integer.parseInt(txtOuro.getText()));
+			p.setPrata(Integer.parseInt(txtPrata.getText()));
+			p.setBronze(Integer.parseInt(txtBronze.getText()));
 			
 			q.alterar(sigla, p);
 			TelaQuadro tela = new TelaQuadro(null, true);
